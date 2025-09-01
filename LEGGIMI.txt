@@ -1,0 +1,176 @@
+========================================================
+RECCOMAI — GUIDA ALL’INSTALLAZIONE (LEGGI PRIMA!)
+========================================================
+
+## 🔐 SHA-256 Checksum
+
+Installer file: `ReccomAI_GPU_Installer.exe`  
+SHA-256:
+ff95f3842be0e9f4f8f89c27b8b95ba4ad044c4d52730b43e3e9effd1e8d8ade
+
+
+Ciao 👋 questa guida ti accompagna passo passo per installare ReccomAI
+su Windows. Niente panico: si fa in 5 minuti.
+
+CONTENUTO DEL PACCHETTO
+-----------------------
+Nella cartella che hai scaricato/estratto troverai:
+- ReccomAI_Installer.exe        ← l’installer principale
+- ReccomAI_Installer-1.bin      ← file “pezzi” dell’installer
+- ReccomAI_Installer-2.bin      ← se presente, altri “pezzi”
+  (IMPORTANTE: l’EXE e tutti i .BIN DEVONO stare insieme
+   nella stessa cartella, altrimenti l’installazione fallisce)
+- README.txt                    ← questo file (da leggere!)
+
+REQUISITI
+---------
+- Sistema: Windows 10 o Windows 11 (64 bit)
+- Spazio libero su disco: almeno 6 GB
+- Connessione internet: NON necessaria per usare l’app
+- GPU: NON richiesta (questa versione lavora su GPU)
+
+⚠️ IMPORTANTE: PYTHON
+---------------------
+ReccomAI richiede Python **3.10.8** installato nel sistema e aggiunto alla PATH globale.
+
+→ Scarica Python 3.10.8 da qui:  
+https://www.python.org/ftp/python/3.10.8/python-3.10.8-amd64.exe
+
+Durante l’installazione:
+☑️ Spunta l’opzione “Add Python to PATH”  
+☑️ Conferma che la versione sia esattamente 3.10.8 (non 3.11, 3.12 ecc.) per problemi di compatibilità
+
+COS’È ReccomAI (in 10 parole)
+-----------------------------
+È un’app locale (niente cloud) che avvia:
+1) un model server (il “cervello”),
+2) la WebUI (l’interfaccia nel browser),
+3) e un piccolo lettore sensori (OpenHardwareMonitor) per lo stato interno.
+
+COME INSTALLARE (PASSO-PASSO)
+-----------------------------
+1) **ESTRAI LO ZIP**
+   - Non lanciare l’installer da dentro lo ZIP.
+   - Clic destro sullo ZIP → “Estrai tutto…”
+   - Apri la cartella estratta: deve contenere l’EXE e i BIN.
+
+2) **AVVIA L’INSTALLER**
+   - Doppio clic su: ReccomAI_Installer.exe
+   - Se compare Windows SmartScreen:
+     • Clic su “Informazioni aggiuntive”
+     • Clic su “Esegui comunque”
+
+3) **SCEGLI LA CARTELLA DI INSTALLAZIONE**
+   - La posizione predefinita va bene (es. C:\Utenti\...AppData\Local\Reccom\ReccomAI)
+   - Puoi cambiarla (es. C:\ReccomAI). A tua scelta.
+
+4) **ASPETTA L’INSTALLAZIONE**
+   - Se sul PC non c’è già, verrà installato anche Python 3.10.8 (automatico).
+   - Non chiudere la finestra finché non termina.
+
+5) **AVVIO IMMEDIATO (OPZIONALE)**
+   - A fine installazione, spunta “Start ReccomAI now” per partire subito.
+   - In ogni caso viene creata una scorciatoia sul Desktop: “ReccomAI”.
+
+COME AVVIARE (DOPO L’INSTALLAZIONE)
+-----------------------------------
+- Doppio clic sull’icona “ReccomAI” sul Desktop.
+- Si aprirà una finestra nera (console) che lancia i servizi:
+  • OpenHardwareMonitor (lettura sensori — parte in automatico)
+  • il model server locale (porta 8091)
+  • la WebUI (porta 8000)
+- NON chiuderla: è “il motore” dell’app. Lasciala lì.
+
+COME USARE
+----------
+1) Apri il browser e vai su: http://127.0.0.1:8000/
+   (oppure su http://127.0.0.1:8000/docs per le API/Swagger)
+2) Inizia a chattare con ReccomAI.
+3) Tutto gira in locale; i dati restano sul tuo PC.
+
+MESSAGGI DI SICUREZZA/AVVISI (NORMALI)
+--------------------------------------
+- **SmartScreen**: vedi sopra (“Esegui comunque”).
+- **Firewall**: Windows può chiedere se consentire l’accesso
+  a “python.exe”, “uvicorn” o “llama-server.exe”.
+  • Consenti SULLE RETI PRIVATE. (Va bene anche se neghi sulle pubbliche.)
+
+COME CHIUDERE
+-------------
+- Chiudi la finestra nera (console) che si è aperta all’avvio.
+- In questo modo spegni sia il server che la WebUI.
+- Alla prossima, riapri l’icona “ReccomAI” sul Desktop.
+
+DOVE SONO I DATI (LOG/CHAT)
+---------------------------
+- Cartella di installazione → “memory”
+- Lì troverai i log delle chat e altri file dell’app.
+- Se vuoi “ripulire”, chiudi l’app e svuota la cartella “memory”.
+  (Attenzione: perderai la cronologia delle chat.)
+
+PROBLEMI COMUNI & SOLUZIONI
+---------------------------
+1) **“File corrotto” o “manca un .bin” durante l’installazione**
+   → Assicurati di aver ESTRATTO lo ZIP e di avere l’EXE
+     e TUTTI i file “.bin” nella stessa cartella.
+
+2) **L’icona parte ma il browser non si apre**
+   → Apri manualmente: http://127.0.0.1:8000/
+   → Se non risponde, attendi 10–20 secondi (il modello si “scalda”).
+   → Ancora niente? Chiudi e riapri l’icona “ReccomAI”.
+
+3) **La pagina 8000 non si apre / errore porta occupata**
+   → Chiudi eventuali altri programmi che usano la porta 8000.
+   → In alternativa, riavvia il PC e riprova.
+
+4) **Antivirus blocca qualcosa**
+   → Aggiungi la cartella di installazione di ReccomAI
+     alla lista delle esclusioni del tuo antivirus.
+
+5) **Il PC è lentino / la risposta arriva piano**
+   → È normale: questa versione usa solo la CPU.
+   → Lascia qualche secondo in più per la risposta,
+     soprattutto al primo messaggio dopo l’avvio.
+
+6) **OpenHardwareMonitor non parte**
+   → L’app funziona lo stesso, ma senza “stato sensoriale”.
+   → Riavvia ReccomAI. Se persiste, prova a riavviare Windows.
+
+7) **Messaggi su DLL “VCRUNTIME/MSVCP” mancanti**
+   → Segnala al supporto: nella versione Pro includeremo
+     l’installazione del “Microsoft VC++ Redistributable 2022”.
+
+COME DISINSTALLARE
+------------------
+- Windows → Impostazioni → App → Installate → cerca “ReccomAI” → Disinstalla
+- Oppure dal menu Start voce “Disinstalla ReccomAI”.
+
+AGGIORNAMENTI
+-------------
+- Per aggiornare: disinstalla ReccomAI e installa la nuova versione
+  (mantieni una copia della cartella “memory” se vuoi conservare le chat).
+
+ASSISTENZA (COSA DIRCI SE CHIEDI AIUTO)
+---------------------------------------
+Se hai bisogno di aiuto, indicaci:
+- Versione di Windows (10/11, 64 bit)
+- Dove hai installato ReccomAI (es. C:\ReccomAI)
+- Cosa succede esattamente (messaggio, schermata)
+- Se possibile, le ultime 20 righe della finestra nera (console)
+
+
+VERSIONI ALTERNATIVE
+--------------------
+Esistono installer dedicati per le seguenti configurazioni:
+
+1) **GPU NVIDIA con almeno 6 GB di VRAM**
+   → Scarica la versione “solo GPU” per prestazioni migliori.
+   → Serve installare anche i driver CUDA/ROCm se richiesto.
+
+2) **CPU MOLTO VECCHIE (senza AVX2)**
+   → Se il tuo processore è del 2014 o precedente e ricevi errori AVX,
+     scarica l’installer “compatibile AVX-less”.
+
+In caso di dubbio, inizia dalla versione STANDARD (CPU-only).
+
+Grazie e buon divertimento con ReccomAI! 🚀
